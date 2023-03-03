@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input, select, textarea, label{
+            margin-top: 10px;
+        }
+        form{
+            margin-left: 20px;
+        }
+    </style>
+    <title>Form Pembelian</title>
+</head>
+<body>
+    <h1>Form Pemesanan Baju</h1>
+
+    <form action="#" method="post">
+        <label for="nama">Nama : </label><br>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan Nama Anda"><br>
+        <label for="gender">Jenis Kelamin : </label><br>
+        <input type="radio" id="cow" name="gender" value="Laki-laki">
+        <label for="cow">Laki-Laki</label><br>
+        <input type="radio" id="cew" name="gender" value="Perempuan">
+        <label for="cew">Perempuan</label><br>
+        <label for="tinggi">Tinggi : </label><br>
+        <input type="number" id="tinggi" name="tinggi" placeholder="Masukkan Tinggi Badan Anda"><br>
+        <label for="berat">Berat : </label><br>
+        <input type="number" id="berat" name="Berat" placeholder="Masukkan Berat Badan Anda"><br>
+        <label for="hips">Lingkar Pinggang : </label><br>
+        <input type="number" id="hips" name="hips" placeholder="Masukkan Lingkar Pinggang Anda"><br>
+        <label for="kain">Jenis Kain</label><br>
+        <select name="kain" id="kain">
+            <option value="none">--Pilih Kualitas Kain--</option>
+            <option value="mahal">Kualitas Tinggi</option>
+            <option value="sedang">Kualitas Menengah</option>
+            <option value="murah">Kualitas Biasa</option>
+        </select><br>
+        <label for="alamat">Alamat Pengiriman</label><br>
+        <textarea name="alamat" id="alamat" cols="30" rows="10" placeholder="Masukkan Alamat Anda"></textarea><br>
+        <label for="ref">Referensi Desain</label><br>
+        <input type="file" name="ref" id="ref"><br>
+    </form>
+</body>
+</html>

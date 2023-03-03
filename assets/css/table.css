@@ -1,5 +1,27 @@
-.table2, th, td {
-    border:2px solid black;
-    margin-top: 50px;
+.table2 th{
+    border:1px solid black;
+    margin-top: 20px;
+}
+.table2 td{
+    border:1px solid black;
 }
 
+.table2{
+    border: 1px solid;
+    margin-top: 20px;
+}
+
+.table1 {
+    border-style: none;
+    border:0px
+}
+
+.judul{
+    text-align: center;
+    margin-right: 1000px;
+}
+
+td{
+    padding-right: 30px;
+    padding-left: 10px;
+}
