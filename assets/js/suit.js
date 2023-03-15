@@ -52,14 +52,19 @@ function suit() {
 function jsFundamental() {
     // Tipe data
 
-    let umur = 20;
     const harga = 12000; //harganya tidak bisa diubah
     let jumlahUang = 13000
-    var nama = "Alif Fadhil Muhamad" //bisa diakses secara global
     let uangCukup = false;
     let hasil;
+    let kosong = null
+    let people = {
+        name : "Alif Fadhil Muhamad",
+        age : 20,
+        job : "Student",
+        address : "Jl. Laode Abdul Kudus No.14"
+    }
 
-    console.log("Pekenalkan nama saya "+nama+", umur saya "+umur);
+    console.log("Pekenalkan nama saya "+people.name+", umur saya "+people.age+"\nSaat ini saya berprofesi sebagai "+people.job+"\nSaya tinggal di "+people.address);
 
     if ( harga > jumlahUang) {
         hasil = "Apakah uang saya cukup ? "+uangCukup
