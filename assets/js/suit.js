@@ -67,12 +67,31 @@ function jsFundamental() {
     console.log("Pekenalkan nama saya "+people.name+", umur saya "+people.age+"\nSaat ini saya berprofesi sebagai "+people.job+"\nSaya tinggal di "+people.address);
 
     if ( harga > jumlahUang) {
-        hasil = "Apakah uang saya cukup ? "+uangCukup
+        hasil = "Apakah uang saya cukup ? "+uangCukup+"\nJumlah uang saya : "+jumlahUang+"\nHarga barang : "+harga
         console.log(hasil);
     }else{
         uangCukup = true
-        hasil = "Apakah uang saya cukup ? "+uangCukup
+        hasil = "Apakah uang saya cukup ? "+uangCukup+"\nJumlah uang saya : "+jumlahUang+"\nHarga barang : "+harga
         console.log(hasil);
+    }
+
+    let nilai = prompt("Masukkan nilai anda ",'0-100')
+    // let kkm = prompt("Masukkan KKM pelajaran ",'0-100')
+
+    if (nilai >= 95 && nilai<=100) {
+        hasil = "Anda Lulus dengan nilai A"
+        console.log(hasil);
+    }else if (nilai >= 85) {
+        hasil = "Anda Lulus dengan nilai B"
+        console.log(hasil);
+    }else if (nilai >= 75) {
+        hasil = "Anda Lulus dengan nilai C"
+        console.log(hasil);
+    }else if (nilai < 75 && nilai >= 0) {
+        hasil = "Anda Tidak Lulus dengan nilai E"
+        console.log(hasil);
+    }else{
+        hasil = "Nilai yang anda masukkan keluar dari indeks yang ditentukan"
     }
     document.getElementById('fundamental').innerHTML = "Lihat Outputnya pada Console =>>>>> <br>"
 }
