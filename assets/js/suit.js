@@ -48,3 +48,26 @@ function suit() {
     }
     // console.log(comp);
 }
+
+function jsFundamental() {
+    // Tipe data
+
+    let umur = 20;
+    const harga = 12000; //harganya tidak bisa diubah
+    let jumlahUang = 13000
+    var nama = "Alif Fadhil Muhamad" //bisa diakses secara global
+    let uangCukup = false;
+    let hasil;
+
+    console.log("Pekenalkan nama saya "+nama+", umur saya "+umur);
+
+    if ( harga > jumlahUang) {
+        hasil = "Apakah uang saya cukup ? "+uangCukup
+        console.log(hasil);
+    }else{
+        uangCukup = true
+        hasil = "Apakah uang saya cukup ? "+uangCukup
+        console.log(hasil);
+    }
+    document.getElementById('fundamental').innerHTML = "Lihat Outputnya pada Console =>>>>> <br>"
+}
