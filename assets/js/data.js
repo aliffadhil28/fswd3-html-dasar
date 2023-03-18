@@ -1128,7 +1128,7 @@ var del = document.getElementsByTagName("span");
 for (var i = 0; i < totalItem.length; i++) {
   var data = del[i];
   data.onclick = function () {
-    let index = totalItem.indexOf();
+    let index = totalItem.indexOf(`${i}`);
     totalItem.splice(index, 1);
     this.parentElement.remove();
     // console.log(totalItem);
