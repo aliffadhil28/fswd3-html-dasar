@@ -1087,7 +1087,7 @@ console.log(kategori);
 
 // API Init
 // connect API
-const apiKey = "f8e00dea03454d5fba83be5852c652fd";
+const apiKey = "e3db5a66ec674d0c8b44afdc19ab086b";
 const baseUrl = "https://crudcrud.com/api/";
 const url = baseUrl + apiKey;
 
@@ -1266,10 +1266,10 @@ async function itemComplete(a) {
   let value = a.target.textContent;
   let check = a.target.parentElement.dataset.check;
   if (check == false) {
-    check = true;
+    return (check = true);
   }
   if (check == true) {
-    check = false;
+    return (check = false);
   }
   let id = a.target.parentElement.dataset.id;
   // localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -1280,7 +1280,7 @@ async function itemComplete(a) {
     },
     body: JSON.stringify({
       tasks: value,
-      checked: !check,
+      checked: check,
     }),
   }).then(location.reload());
   // data.forEach((b) => {
