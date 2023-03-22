@@ -1087,7 +1087,7 @@ console.log(kategori);
 
 // API Init
 // connect API
-const apiKey = "e3db5a66ec674d0c8b44afdc19ab086b";
+const apiKey = "ff6b3ac30bb7463a8901b30c528495dd";
 const baseUrl = "https://crudcrud.com/api/";
 const url = baseUrl + apiKey;
 
