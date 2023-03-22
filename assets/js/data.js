@@ -1085,101 +1085,236 @@ console.log(kategori);
 // <-----   HTML Script  ------>
 //
 
+// API Init
+// connect API
+const apiKey = "f8e00dea03454d5fba83be5852c652fd";
+const baseUrl = "https://crudcrud.com/api/";
+const url = baseUrl + apiKey;
+
+const endpointTask = `${url}/task`;
+const handleError = (error) => console.log(error);
+const handleSuccess = (result) => console.log(result);
+
+async function getapi(url) {
+  // Storing response
+  const response = await fetch(url);
+
+  // Storing data in form of JSON
+  var data = await response.json();
+  console.log(data);
+  if (response) {
+    console.log("Data");
+  }
+  getData(data);
+  return data;
+  // console.log(data);
+}
+async function getItem(url) {
+  // Storing response
+  const response = await fetch(url);
+
+  // Storing data in form of JSON
+  var data = await response.json();
+  console.log(data);
+  if (response) {
+    console.log("Data");
+  }
+  // getData(data);
+  return data;
+  // console.log(data);
+}
+
+// async function deleteApi(value) {
+// Storing response
+// const response = await fetch(url);
+// Storing data in form of JSON
+// var data = await response.json();
+// data.forEach((a) => {
+//   let id = a._id;
+//   console.log(id);
+//   if (value === a.tasks) {
+//     deleteTask(id);
+//   }
+// });
+// if (response) {
+//   console.log("Data");
+// }
+// }
+
+function getData(data) {
+  data.forEach((a) => {
+    let ul = document.getElementById("container-item");
+    let li = document.createElement("li");
+    if (a.checked !== false) {
+      // li.dataset.id = a._id;
+      li.setAttribute("data-id", `${a._id}`);
+      li.setAttribute("data-check", `${a.checked}`);
+      li.className = "list-group-item pl-4 checked";
+      li.innerHTML = `<p class="col-10 float-start" onclick="itemComplete(event)">${a.tasks}</p>
+      <span class="col-1 btn btn-outline-danger float-end" onclick="removeItem(this)">\u00D7</span>`;
+      ul.appendChild(li);
+    } else {
+      // li.dataset.id = a._id;
+      li.setAttribute("data-id", `${a._id}`);
+      li.setAttribute("data-check", `${a.checked}`);
+      li.className = "list-group-item pl-4";
+      li.innerHTML = `<p class="col-10 float-start" onclick="itemComplete(event)">${a.tasks}</p>
+      <span class="col-1 btn btn-outline-danger float-end" onclick="removeItem(this)">\u00D7</span>`;
+      ul.appendChild(li);
+    }
+  });
+}
+
+const addTask = (data) => {
+  fetch(endpointTask, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    // mode: "no-cors",
+  })
+    .then(handleSuccess)
+    .catch(handleError);
+};
+
+const deleteTask = (id) => {
+  fetch(`${endpointTask}/${id}`, {
+    method: "DELETE",
+  })
+    .then(handleSuccess)
+    .catch(handleError);
+};
+
 var totalItem = [];
 window.onload = loadItem();
 
+// console.log(loadItem());
+
+// Local Storage
+
 function loadItem() {
-  let items = Array.from(JSON.parse(localStorage.getItem("items")));
-  console.log(items);
-  if (items === "undefined") {
-    window.localStorage.setItem("items", "[ ]");
-  } else {
-    items.forEach((item) => {
-      let ul = document.querySelector("ul");
-      let li = document.createElement("li");
-      li.className = "list-group-item pl-4";
-      ul.appendChild(li);
-      li.innerHTML = `${item}`;
-      totalItem.push(item);
-      return li;
-    });
-    window.localStorage.setItem("items", JSON.stringify(totalItem));
-  }
+  // get data API
+  getapi(endpointTask);
+
+  //get data local storage
+  //
+  // let items = Array.from(JSON.parse(localStorage.getItem("tasks")));
+
+  // if (items === "undefined") {
+  //   window.localStorage.setItem("tasks", "[ ]");
+  // } else {
+  //   items.forEach((item) => {
+  //     let ul = document.querySelector("ul");
+  //     let li = document.createElement("li");
+  //     if (item.checked !== false) {
+  //       li.className = "list-group-item pl-4 checked";
+  //       li.innerHTML = `<p class="col-10 float-start" onclick="itemComplete(event)">${item.tasks}</p>
+  //       <span class="col-1 btn btn-outline-danger float-end" onclick="removeItem(this)">\u00D7</span>`;
+  //       ul.appendChild(li);
+  //     } else {
+  //       li.className = "list-group-item pl-4";
+  //       li.innerHTML = `<p class="col-10 float-start" onclick="itemComplete(event)">${item.tasks}</p>
+  //       <span class="col-1 btn btn-outline-danger float-end" onclick="removeItem(this)">\u00D7</span>`;
+  //       ul.appendChild(li);
+  //     }
+  //   });
+  // }
 }
 
-console.log(totalItem);
-
-// Adjust Item
-var container = document.getElementById("container-item");
-var list = document.createElement("li");
-var span = document.createElement("span");
-var text = document.createTextNode("\u00D7");
-list.className = "list-group-item ml-3";
-span.className = "col-1 btn btn-outline-danger";
-span.appendChild(text);
-for (let i = 0; i < container.length; i++) {
-  container.appendChild(li);
-  li[i].appendChild(span);
-}
-
-// Delete Item
-
-var del = document.getElementsByTagName("span");
-for (var i = 0; i < totalItem.length; i++) {
-  var data = del[i];
-  data.onclick = function () {
-    let index = totalItem.indexOf(`${i}`);
-    totalItem.splice(index, 1);
-    this.parentElement.remove();
-    // console.log(totalItem);
-    window.localStorage.setItem("items", JSON.stringify(totalItem));
-  };
-  console.log(`${i}`);
-}
-
-var list = document.querySelector("ul");
-list.addEventListener(
-  "click",
-  function (ev) {
-    if (ev.target.tagName === "LI") {
-      ev.target.classList.toggle("checked");
-      // totalItem.push(ev.target)
-      console.log(list);
-      window.localStorage.setItem("items", JSON.stringify(totalItem));
-    }
-  },
-  false
-);
-
-// Add Item
 function addItem() {
-  var li = document.createElement("li");
-  var input = document.getElementById("inputTodo").value;
-  var content = document.createTextNode(input);
-  li.className = "list-group-item";
-  li.appendChild(content);
-  if (input === "") {
-    alert("Anda harus memasukkan teks");
-  } else {
-    document.getElementById("container-item").appendChild(li);
-    let list = (li.innerHTML = `${input}
-    <span class="col-1 btn btn-outline-danger float-end">\u00D7</span>`);
-    totalItem.push(list);
-    console.log(totalItem);
-    window.localStorage.setItem("items", JSON.stringify(totalItem));
-    console.log(container.childNodes);
-  }
-  // console.log(del.length);
-  input = "";
+  //Data ke API
+  let ul = document.querySelector("ul");
+  let input = document.getElementById("inputTodo").value;
+  let data = { tasks: input, checked: false };
 
-  for (var i = 0; i < del.length; i++) {
-    del[i].onclick = function () {
-      this.parentElement.remove();
-      // localStorage.removeItem("items");
-    };
-  }
+  // Data ke Local Storage
+  //
+
+  // if (input.value === "") {
+  //   alert("Mohon masukkan teks");
+  //   return false;
+  // } else {
+  let li = document.createElement("li");
+  li.className = "list-group-item pl-4";
+  li.innerHTML = `<p class="col-10 float-start" onclick="itemComplete(this)">${input}</p><span class="col-1 btn btn-outline-danger float-end" onclick = "removeItem(this)">\u00D7</span>`;
+  ul.appendChild(li);
+  addTask(data);
+
+  //   localStorage.setItem(
+  //     "tasks",
+  //     JSON.stringify([
+  //       ...JSON.parse(localStorage.getItem("tasks") || "[]"),
+  //       { tasks: input, checked: false },
+  //     ])
+  //   );
+  // }
+  input = "";
 }
 
-// console.log(container.children);
-// window.localStorage.removeItem("items");
-// var container = document.getElementsByTagName("li").length;
+async function itemComplete(a) {
+  // let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  // tasks.forEach((task) => {
+  //   if (task.tasks == event.target.textContent) {
+  //     task.checked = !task.checked;
+  //     console.log("a");
+  //   }
+  // });
+
+  // let response = await fetch(endpointTask);
+  // let data = await response.json();
+  let value = a.target.textContent;
+  let check = a.target.parentElement.dataset.check;
+  if (check == false) {
+    check = true;
+  }
+  if (check == true) {
+    check = false;
+  }
+  let id = a.target.parentElement.dataset.id;
+  // localStorage.setItem("tasks", JSON.stringify(tasks));
+  fetch(`${endpointTask}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      tasks: value,
+      checked: !check,
+    }),
+  }).then(location.reload());
+  // data.forEach((b) => {
+  //   let id = b._id;
+  //   b.checked = !b.checked;
+  //   // console.log(b.checked);
+  // });
+
+  a.target.parentElement.classList.toggle("checked");
+  console.log(value);
+  // console.log(id);
+  console.log(check);
+}
+
+function removeItem(del) {
+  let items = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  let id = del.parentElement.dataset.id;
+  console.log(id);
+  fetch(`${endpointTask}/${id}`, {
+    method: "DELETE",
+  })
+    .then((result) => result.json())
+    .then(location.reload());
+  items.forEach((item) => {
+    if (item.tasks === del.previousElementSibling.textContent) {
+      items.splice(items.indexOf(item), 1);
+      del.parentElement.remove();
+      localStorage.setItem("tasks", JSON.stringify(items));
+    }
+  });
+}
+
+// let remove = document.getElementById("btnRemove");
+// remove.addEventListener("click", (e) => {
+// e.preventDefault();
+//   console.log(e.target.parentElement);
+// });
