@@ -1282,7 +1282,11 @@ async function itemComplete(a) {
       tasks: value,
       checked: check,
     }),
-  }).then(location.reload());
+  }).then(
+    setTimeout(() => {
+      location.reload();
+    }, 500)
+  );
   // data.forEach((b) => {
   //   let id = b._id;
   //   b.checked = !b.checked;
@@ -1303,7 +1307,13 @@ function removeItem(del) {
     method: "DELETE",
   })
     .then((result) => result.json())
-    .then(location.reload());
+    .then(
+      then(
+        setTimeout(() => {
+          location.reload();
+        }, 500)
+      )
+    );
   items.forEach((item) => {
     if (item.tasks === del.previousElementSibling.textContent) {
       items.splice(items.indexOf(item), 1);
