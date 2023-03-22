@@ -1253,6 +1253,46 @@ function addItem() {
 }
 
 async function itemComplete(a) {
+  var value = a.target.textContent;
+  var id = a.target.parentElement.dataset.id;
+  var check = a.target.parentElement.dataset.check;
+  if (check == false) {
+    check = true;
+    fetch(`${endpointTask}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        tasks: value,
+        checked: check,
+      }),
+    }).then(
+      setTimeout(() => {
+        location.reload();
+      }, 500)
+    );
+    console.log(check);
+  } else {
+    check = false;
+    fetch(`${endpointTask}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        tasks: value,
+        checked: check,
+      }),
+    }).then(
+      setTimeout(() => {
+        location.reload();
+      }, 500)
+    );
+    console.log(check);
+  }
+  // Local Storage
+
   // let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
   // tasks.forEach((task) => {
   //   if (task.tasks == event.target.textContent) {
@@ -1263,34 +1303,11 @@ async function itemComplete(a) {
 
   // let response = await fetch(endpointTask);
   // let data = await response.json();
-  let value = a.target.textContent;
-  let check = a.target.parentElement.dataset.check;
-  if (check == false) {
-    return (check = true);
-  }
-  if (check == true) {
-    return (check = false);
-  }
-  let id = a.target.parentElement.dataset.id;
-  // localStorage.setItem("tasks", JSON.stringify(tasks));
-  fetch(`${endpointTask}/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      tasks: value,
-      checked: check,
-    }),
-  }).then(
-    setTimeout(() => {
-      location.reload();
-    }, 500)
-  );
   // data.forEach((b) => {
   //   let id = b._id;
   //   b.checked = !b.checked;
-  //   // console.log(b.checked);
+  // console.log(b.checked);
+  // localStorage.setItem("tasks", JSON.stringify(tasks));
   // });
 
   a.target.parentElement.classList.toggle("checked");
