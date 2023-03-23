@@ -1175,6 +1175,11 @@ const addTask = (data) => {
     // mode: "no-cors",
   })
     .then(handleSuccess)
+    .then(
+      setTimeout(() => {
+        location.reload();
+      }, 1500)
+    )
     .catch(handleError);
 };
 
