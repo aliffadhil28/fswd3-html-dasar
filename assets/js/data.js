@@ -1087,7 +1087,7 @@ console.log(kategori);
 
 // API Init
 // connect API
-const apiKey = "ff6b3ac30bb7463a8901b30c528495dd";
+const apiKey = "75f5d6e2c9cd4654ab012ad642b1bc69";
 const baseUrl = "https://crudcrud.com/api/";
 const url = baseUrl + apiKey;
 
@@ -1276,24 +1276,22 @@ async function itemComplete(a) {
       console.log(check);
     }
   } else {
-    check = true;
-    if (check == true) {
-      fetch(`${endpointTask}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          // _id: id,
-          tasks: value,
-          checked: check,
-        }),
-      }).then(
-        setTimeout(() => {
-          location.reload();
-        }, 1500)
-      );
-    }
+    // check = true;
+    fetch(`${endpointTask}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        // _id: id,
+        tasks: value,
+        checked: !check,
+      }),
+    }).then(
+      setTimeout(() => {
+        location.reload();
+      }, 1500)
+    );
     // console.log(check);
   }
   // Local Storage
