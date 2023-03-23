@@ -1258,38 +1258,43 @@ async function itemComplete(a) {
   var check = a.target.parentElement.dataset.check;
   if (check == false) {
     check = true;
-    fetch(`${endpointTask}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        tasks: value,
-        checked: check,
-      }),
-    }).then(
-      setTimeout(() => {
-        location.reload();
-      }, 500)
-    );
-    console.log(check);
+    if (check == true) {
+      fetch(`${endpointTask}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          tasks: value,
+          checked: check,
+        }),
+      }).then(
+        setTimeout(() => {
+          location.reload();
+        }, 1500)
+      );
+      console.log(check);
+    }
   } else {
-    check = false;
-    fetch(`${endpointTask}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        tasks: value,
-        checked: check,
-      }),
-    }).then(
-      setTimeout(() => {
-        location.reload();
-      }, 500)
-    );
-    console.log(check);
+    check = true;
+    if (check == true) {
+      fetch(`${endpointTask}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          // _id: id,
+          tasks: value,
+          checked: check,
+        }),
+      }).then(
+        setTimeout(() => {
+          location.reload();
+        }, 1500)
+      );
+    }
+    // console.log(check);
   }
   // Local Storage
 
@@ -1312,12 +1317,12 @@ async function itemComplete(a) {
 
   a.target.parentElement.classList.toggle("checked");
   console.log(value);
-  // console.log(id);
-  console.log(check);
+  console.log(id);
+  // console.log(check);
 }
 
 function removeItem(del) {
-  let items = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  // let items = Array.from(JSON.parse(localStorage.getItem("tasks")));
   let id = del.parentElement.dataset.id;
   console.log(id);
   fetch(`${endpointTask}/${id}`, {
@@ -1325,11 +1330,9 @@ function removeItem(del) {
   })
     .then((result) => result.json())
     .then(
-      then(
-        setTimeout(() => {
-          location.reload();
-        }, 500)
-      )
+      setTimeout(() => {
+        location.reload();
+      }, 1500)
     );
   items.forEach((item) => {
     if (item.tasks === del.previousElementSibling.textContent) {
