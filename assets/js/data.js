@@ -1087,7 +1087,7 @@ console.log(kategori);
 
 // API Init
 // connect API
-const apiKey = "75f5d6e2c9cd4654ab012ad642b1bc69";
+const apiKey = "d26a32d72c49447191c0807858c6e9bc";
 const baseUrl = "https://crudcrud.com/api/";
 const url = baseUrl + apiKey;
 
@@ -1261,44 +1261,26 @@ async function itemComplete(a) {
   var value = a.target.textContent;
   var id = a.target.parentElement.dataset.id;
   var check = a.target.parentElement.dataset.check;
-  if (check == false) {
-    check = true;
-    if (check == true) {
-      fetch(`${endpointTask}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          tasks: value,
-          checked: check,
-        }),
-      }).then(
-        setTimeout(() => {
-          location.reload();
-        }, 1500)
-      );
-      console.log(check);
-    }
-  } else {
-    // check = true;
-    fetch(`${endpointTask}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        // _id: id,
-        tasks: value,
-        checked: !check,
-      }),
-    }).then(
-      setTimeout(() => {
-        location.reload();
-      }, 1500)
-    );
-    // console.log(check);
-  }
+  check = check ? false : true;
+  console.log(check);
+
+  // console.log(check);
+  fetch(`${endpointTask}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      tasks: value,
+      checked: check,
+    }),
+  }).then((res) => console.log(res));
+
+  // then(
+  //   setTimeout(() => {
+  //     location.reload();
+  //   }, 1500)
+  // );
   // Local Storage
 
   // let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
@@ -1319,8 +1301,8 @@ async function itemComplete(a) {
   // });
 
   a.target.parentElement.classList.toggle("checked");
-  console.log(value);
-  console.log(id);
+  // console.log(value);
+  // console.log(id);
   // console.log(check);
 }
 
