@@ -74,11 +74,12 @@ header {
 .card-contain .title {
   font-weight: bold;
   color: white;
+  margin-bottom: 0.7em;
 }
 
 .card-contain {
   padding-top: 7em;
-  margin: 0.5em;
+  margin: 1em;
   z-index: 1;
 }
 
@@ -140,8 +141,8 @@ header {
     position: absolute;
   }
   .card-contain {
-    padding-top: 6em;
-    margin: 0.5em;
+    padding-top: 3em;
+    margin: 0.8em;
     z-index: 1;
   }
   .side {
